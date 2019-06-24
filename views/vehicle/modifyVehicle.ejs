@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+    <div class="mui-container">
+        <div class="mui-panel" style="margin-top: 72px; margin-left:10% ">
+            <form class="mui-form" method="POST" action="/vehicle/updateVehicle">
+                <legend>Modify vehicle</legend>
+                <div class="mui-row">
+                    <select name="vehicle" id="vehicle-select" style="width:35%; font: size 10pt;" required></select>
+
+                </div>
+                <div class="mui-row">
+                    <div class="mui-textfield mui-select mui-col-md-6">
+                        <input type="text" name="registration" id="registration" readonly
+                            placeholder="Registration No." />
+                    </div>
+                </div>
+                <!-- <p id="invalid-message" style="color: red;"></p>
+                <br> -->
+                <div class="mui-row">
+                    <div class="mui-textfield mui-select mui-col-md-6">
+                        <input type="text" name="company" id="company" readonly placeholder="company name" />
+                    </div>
+                </div>
+                <div class="mui-row">
+                    <div class="mui-textfield mui-select mui-col-md-6">
+                        <input type="text" name="driver" required placeholder="Driver name" id="driver" />
+                    </div>
+                </div>
+                <div class="mui-row">
+                    <div class="mui-textfield mui-select mui-col-md-6">
+                        <input type="text" name="driver_no" required placeholder="Driver Contact" id="driver_no" />
+                    </div>
+                </div>
+                <input type="hidden" name="vehicleId" id="vehicleId" value="hh">
+                <input type="hidden" name="vehicleType" id="vehicleType" value="hh">
+                <input type="hidden" name="vehicleColor" id="vehicleColor" value="hh">
+                <input type="hidden" name="companyId" id="companyId" value="hh">
+
+                <button class="mui-btn mui-btn--primary mui-btn--raised" id="btnSubmit" type="submit">
+                    Confirm
+                </button>
+            </form>
+        </div>
+    </div>
+    <% include ../common/footer.ejs %>
+
+
+    <script>
+        $('#vehicle-select').on('change', function (val) {
+            var selected = $(this).children("option:selected").val();
+            var splitted = selected.split(',');
+            vehicle = splitted[0];
+            console.log(selected);
+            var myLink = '/ajax/get-company1?id=' + selected
+            $("#company-name-field").val('...loading...');
+            $.ajax({
+                url: myLink,
+                success: function (result) {
+                    console.log(result)
+                    company = result.customer.name;
+                    console.log(company)
+                    var a1, v1;
+
+
+                    $("#company").val(result.customer.name);
+                    $("#companyId").val(result.customer.objectId);
+                    $("#driver").val(result.driver);
+                    $("#driver_no").val(result.driver_no);
+                    $('#vehicleId').val(result.objectId)
+                    $('#vehicleType').val(result.vehicle_type)
+                    $('#vehicleColor').val(result.color)
+                    $('#registration').val(result.registration)
+
+                },
+                error: function (err) {
+                    alert("API or Network fail");
+                }
+            });
+        })
+
+
+        $('#vehicle-select').select2({
+            ajax: {
+                url: function (params) {
+                    // alert("==>: " + '/ajax/get-vehicle?id=' + params.term);
+                    console.log(params)
+                    return '/ajax/modify-vehicle?';
+                },
+                data: function (params) {
+                    var query = {
+                        id: params.term,
+                    }
+                    return query;
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    return {
+                        results: data,
+                        // vehicles: result
+                    };
+                }
+            },
+            placeholder: 'Searching for vehicle',
+            minimumInputLength: 3,
+            delay: 500
+        });
+    </script>
+
+</body>
+
+</html>

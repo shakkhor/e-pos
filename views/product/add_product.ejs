@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+  <% include ../common/sideBar.ejs %>
+  <header id="header">
+    <% include ../common/navBar.ejs %>
+  </header>
+  <div class="mui-container">
+    <div class="mui-panel" style="margin-top: 7%; margin-left:10% ">
+      <form class="mui-form" method="POST" action="/product/insertInDb">
+        <legend>Add Product</legend>
+        <div class="mui-textfield">
+          <input maxlength="20" type="text" name="product_name" id="vehicle-registration" required
+            placeholder="Product name" />
+        </div>
+        <p id="invalid-message" style="font-size: 14pt"></p>
+        <br>
+        <button class="mui-btn mui-btn--primary mui-btn--raised" type="submit" id="btnSubmit">
+          Confirm
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <script>
+
+    // $('#invalid-message').html("Invalid quantitiy!!");
+
+    $('#vehicle-registration').keyup(function () {
+      $('#invalid-message').html("Checking...");
+
+      var product = $('#vehicle-registration').val();
+
+      var myLink = '/ajax/check-product?id=' + product;
+      $('#btnSubmit').attr("disabled", true);
+      $("#invalid-message").val('Checking...');
+
+      $.ajax({
+        url: myLink,
+        success: function (result) {
+          if (result) {
+            $("#invalid-message").html('This this product already Exists!');
+            $('#btnSubmit').attr("disabled", true);
+          } else {
+            $("#invalid-message").html("");
+            $('#btnSubmit').attr("disabled", false);
+          }
+        },
+        error: function (err) {
+          alert("API or Network fail");
+        }
+      });
+    })
+
+  </script>
+
+
+  <% include ../common/footer.ejs %>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+
+
+
+
+    <div class="mui-container">
+        <div class="mui-panel" style="margin-top: 72px; margin-left:10% ">
+            <div class="panel1">
+                <div>
+                    <table id="customers" class="table-bordered table-sm table table-striped" cellspacing="0"
+                        width="100%">
+                        <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable" style="height: 350px; overflow-y: auto;">
+                            <% users.forEach(function (user) { %>
+                            <tr>
+                                <td><%= user.get('fullName') %></td>
+                                <td><%= user.get('username') %></td>
+                                <td><%= user.get('role') %></td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <% include ../common/footer.ejs %>
+</body>
+
+</html>

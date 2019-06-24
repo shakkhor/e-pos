@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+  <% include ../common/sideBar.ejs %>
+  <header id="header">
+    <% include ../common/navBar.ejs %>
+  </header>
+
+  <div id="content-wrapper ">
+    <div class="mui--appbar-height"></div>
+    <div class="mui-container" style="margin-left:15%">
+      <h2>Search Products</h2>
+      <div class="mui-textfield mui-textfield--float-label">
+        <input id="myInput" type="text">
+        <label>Search..</label>
+      </div>
+      <br>
+      <div style="height:430px;overflow-y:auto;overflow-x:auto;margin-top: 1%; margin-bottom: 2% ">
+        <table id="customers">
+          <thead>
+            <tr>
+              <th>Products</th>
+            </tr>
+          </thead>
+          <tbody id="myTable" style="height: 300px; overflow-y: auto;">
+            <% products.forEach(function (product) { %>
+            <tr>
+              <td><%= product.get('name') %></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+
+
+
+        <footer style="margin-top: 20px;">
+          <% if (pages > 0) { %>
+          <div class="footer">
+            <ul class="pagination text-center">
+
+              <% if (currentPage == 0) { %>
+              <li class="disabled"><a>First</a></li>
+              <% } else { %>
+              <li><a href="/product/view_products?page=0">First</a></li>
+              <% } %>
+
+
+              <% for(var i=1; i < lastPage-1; i++) {%>
+              <% if(i == currentPage){ %>
+              <li class="disabled"><a href="/product/view_products?page=<%= i %>"> <%= i %> </a></li>
+              <% }else{ %>
+              <li><a href="/product/view_products?page=<%= i %>"> <%= i %> </a></li>
+              <% }} %>
+
+              <% if (currentPage == pages-1) { %>
+              <li class="disabled"><a>Last</a></li>
+              <% } else { %>
+              <li><a href="/product/view_products?page=<%= pages-1 %>">Last</a></li>
+              <% } %>
+
+            </ul>
+          </div>
+          <% } %>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <% include ../common/footer.ejs %>
+
+  <script>
+    $(document).ready(function () {
+      $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

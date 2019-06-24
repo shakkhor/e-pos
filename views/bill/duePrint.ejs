@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+    <div class="mui-container">
+        <div class="mui-panel" style="margin-top: 72px; margin-left:10% ">
+            <center>
+                <br>
+                <legend style="margin-left:0%; font-size: 24pt">Print Receipt</legend>
+                <br>
+            </center>
+            <form class="mui-form" method="POST" action="/bill/duePrint">
+
+                <div class="mui-row">
+                    <div class="mui-select mui-col-md-4">
+                        <legend>Company Name</legend>
+                        <div class="mui-textfield">
+                            <input type="text" value="<%= due.company%>" readonly name="company">
+                        </div>
+                    </div>
+                    <div class="mui-select mui-col-md-3">
+                        <legend>Receipt No.</legend>
+                        <div class="mui-textfield">
+                            <input type="text" value="<%= due.id%>" readonly name="id">
+                        </div>
+                    </div>
+                    <div class="mui-select mui-col-md-3">
+                        <legend>Date</legend>
+                        <div class="mui-textfield">
+                            <input type="text" value="<%= due.date%>" readonly name="date">
+                        </div>
+                    </div>
+                </div>
+                <div class="mui-row">
+                    <div class="mui-select mui-col-md-3">
+                        <legend>Old Balance</legend>
+                        <div class="mui-textfield">
+                            <input type="number" name="oldBalance" maxlength="35" readonly
+                                value="<%= due.oldBalance.toFixed(2)%>" id="balance" />
+                        </div>
+                    </div>
+                    <div class="mui-select mui-col-md-3">
+                        <legend>Due Received</legend>
+                        <div class="mui-textfield">
+                            <input type="number" name="dueReceive" step="0.01" value="<%= due.received.toFixed(2)%>"
+                                readonly />
+                        </div>
+                    </div>
+
+                    <div class="mui-select mui-col-md-3">
+                        <legend>Current Balance</legend>
+                        <div class="mui-textfield">
+                            <input type="number" name="currentBalance" step="0.01"
+                                value="<%= due.currentBalance.toFixed(2)%>" readonly />
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="mui-btn mui-btn--primary mui-btn--raised" id="btnSubmit" type="submit">
+                    Print
+                </button>
+            </form>
+        </div>
+    </div>
+    <% include ../common/footer.ejs %>
+
+
+    <script>
+
+        $('#vehicle-select').on('change', function (val) {
+            var selected = $(this).children("option:selected").val();
+            var splitted = selected.split(',');
+            vehicle = splitted[0];
+            console.log(selected);
+            var myLink = '/ajax/get-balance?id=' + vehicle
+            $("#loading").text('...loading...');
+            $('#balance').val('')
+            $.ajax({
+                url: myLink,
+                success: function (result) {
+                    var res = JSON.parse(JSON.stringify(result))
+
+                    $('#balance').val(Number(res[0].balance).toFixed(2))
+                    $("#loading").text('');
+                    console.log(res[0].due)
+                    console.log(res)
+
+                },
+                error: function (err) {
+                    alert("API or Network fail");
+                }
+            });
+        })
+
+
+    </script>
+
+</body>
+
+</html>

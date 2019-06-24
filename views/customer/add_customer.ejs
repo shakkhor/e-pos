@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+    <div class="mui-container">
+        <div class="mui-panel" style="margin-top: 72px; margin-left:10% ">
+            <form class="mui-form" method="POST" action="/customer/insertInDb">
+                <legend>Add Customer</legend>
+                <div class="mui-textfield">
+                    <input type="text" name="company_name" required placeholder="Company name" maxlength="50" />
+                </div>
+                <div class="mui-textfield">
+                    <input type="text" name="address" required placeholder="Address" maxlength="50" />
+                </div>
+                <div class="mui-textfield">
+                    <input type="email" name="email" required placeholder="Email" maxlength="50" />
+                </div>
+                <div class="mui-textfield">
+                    <input type="text" name="contact_person" required placeholder="Contact person name"
+                        maxlength="50" />
+                </div>
+                <div class="mui-textfield">
+                    <input type="text" name="contact_no" required placeholder="Contact" maxlength="50" />
+                </div>
+                <!-- <ul class="mui-list--inline">
+                    <li>
+                        <div class="mui-radio">
+                            <label>
+                                <input type="radio" name="discount_radio" value="parcent">Parcent
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mui-radio">
+                            <label>
+                                <input type="radio" name="discount_radio" value="per_Ltr">Per Ltr
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="mui-textfield">
+                    <input type="number" name="discount" required placeholder="Discount" />
+                </div> -->
+                <button class="mui-btn mui-btn--primary mui-btn--raised" type="submit">
+                    Confirm
+                </button>
+            </form>
+        </div>
+    </div>
+    <% include ../common/footer.ejs %>
+</body>
+
+</html>

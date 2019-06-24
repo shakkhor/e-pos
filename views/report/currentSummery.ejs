@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+
+    <div id="content-wrapper ">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container">
+            <div class="mui-panel" style="margin-top: 1%; margin-left:10% ">
+                <h2><em>Current Summery Of Stock</em></h2>
+                <!-- <h4>Search Products</h4> -->
+                <div class="mui-textfield mui-textfield--float-label">
+                    <input id="myInput" type="text">
+                    <label>Search Products..</label>
+                </div>
+                <br>
+                <table id="customers" class="table-bordered table-sm table table-striped" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Products</th>
+                            <th>Quantity</th>
+                            <th>BP/SP</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable" id="myTable" style="height: 350px; overflow-y: auto;">
+                        <% products.forEach(function (stock) { %>
+                        <tr>
+                            <td><%= stock.get('product').get('name') %></td>
+                            <td><%= stock.get('quantity').toFixed(2) %> Unit(s)</td>
+                            <td><%= stock.get('buyingPrice').toFixed(2) %>/ <%= stock.get('sellingPrice').toFixed(2) %>
+                                tk.</td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <% include ../common/footer.ejs %>
+
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

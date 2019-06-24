@@ -1,0 +1,153 @@
+.homeArt {
+  background-image: url("../img/homeArt.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#footer {
+  box-sizing: border-box;
+  height: 48px;
+  text-align: center;
+  margin-left: 0px;
+  display: flex;
+  background: #333333;
+  align-items: center;
+  justify-content: center;
+  transition: margin-left 0.2s;
+}
+
+.top-panel {
+  position: fixed;
+  right: 0px;
+  top: 12%;
+  left: 20%;
+  bottom: 0px;
+  width: 60%;
+ /* // background: green; */
+}
+
+
+.panel {
+   position: fixed;
+  right: 0px;
+  top: 27%;
+  left: 20%;
+  bottom: 0px;
+  width: 60%;
+ /* // background: green; */
+}
+
+#footerAccount {
+  box-sizing: border-box;
+  height: 48px;
+  text-align: center;
+  margin-left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: margin-left 0.2s;
+}
+
+#customers th {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  border-collapse: collapse;
+  /* width: 100%; */
+}
+#customers td {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  border-collapse: collapse;
+  /* width: 100%; */
+}
+
+
+#customers tr, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: rgb(134, 134, 134);}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+
+
+
+table {
+    width: 100%;
+    /* white-space: nowrap; */
+}
+
+thead, tbody, tr, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 40px;
+
+    /*text-align: left;*/
+}
+
+/* tbody {
+    height: 400px; 
+    overflow-y: auto;
+} */
+
+thead {
+    /* fallback */
+}
+
+ thead th {
+    width: 16%; 
+    float: left;
+}
+tbody td {
+    width: 16.32%; 
+    float: left;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+tbody td.wider {
+  width: 250px;
+}
+
+ thead th.wider {
+  width: 250px;
+}
+
+
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

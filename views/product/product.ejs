@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../common/head.ejs %>
+  <body>
+    <% include ../common/topNav.ejs %>
+    <div class="mui-container">
+      <div class="mui-panel" style="margin-top: 72px;">
+        <div class="mui--text-title">Products</div>
+        <ul>
+          <% products.forEach(function (product) { %>
+          <li><%= product.get('name') %></li>
+          <% }); %>
+        </ul>
+        <button
+          class="mui-btn mui-btn--primary mui-btn--raised"
+          id="addProduct">
+          add product
+        </button>
+      </div>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    document.getElementById("addProduct").onclick = function() {
+      location.href = "/product/create";
+    };
+  </script>
+</html>

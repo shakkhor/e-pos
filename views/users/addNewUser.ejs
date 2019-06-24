@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+    <div id="content-wrapper ">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container">
+            <div class="mui-panel" style="margin-top: 2%; margin-left: 10%">
+                <form class="mui-form" method="POST" action="/users/insertInDb">
+                    <legend>Full name</legend>
+                    <div class="mui-textfield">
+                        <input type="text" name="fullName" required placeholder="Ifta Noor Mahmood" />
+                    </div>
+                    <legend>Username</legend>
+                    <div class="mui-textfield">
+                        <input name="username" required placeholder="ifta" />
+                    </div>
+                    <legend>Select Role</legend>
+                    <div class="mui-select mui-col-md-12">
+                        <select name="role">
+                            <option value="admin" disabled selected>Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="bill">Bill Creator</option>
+                            <option value="sales">Sales Man</option>
+                        </select>
+                    </div>
+
+
+                    <legend>Password</legend>
+                    <div class="mui-textfield">
+                        <input type="password" name="password" required placeholder="Password" />
+                    </div>
+                    <button class="mui-btn mui-btn--primary mui-btn--raised" type="submit">
+                        Register
+                    </button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    <% include ../common/footer.ejs %>
+
+
+</body>
+
+</html>

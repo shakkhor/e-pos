@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <% include ../common/head.ejs %>
+  <body>
+    <div class="mui-container" style="height: 96%">
+      <% include ../common/message.ejs %>
+      <div class="mui-panel" style="margin-top: 7%; ">
+        <form class="mui-form" method="POST" action="/account/register">
+          <legend>Full name</legend>
+          <div class="mui-textfield">
+            <input
+              type="text"
+              name="fullName"
+              required
+              placeholder="Ifta Noor Mahmood"
+            />
+          </div>
+          <legend>Username</legend>
+          <div class="mui-textfield">
+            <input
+              type="email"
+              name="username"
+              required
+              placeholder="ifta@mail.com"
+            />
+          </div>
+          <legend>Password</legend>
+          <div class="mui-textfield">
+            <input
+              type="password"
+              name="password"
+              required
+              placeholder="Password"
+            />
+          </div>
+          <button
+            class="mui-btn mui-btn--primary mui-btn--raised"
+            type="submit"
+          >
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <footer id="footerAccount">
+    <div>
+      <center>Made with ❤️️ by <a href="#">Bridge Tech</a></center>
+    </div>
+  </footer>
+  <script type="text/javascript">
+    document.getElementById("register").onclick = function() {
+      location.href = "/account/register";
+    };
+  </script>
+</html>

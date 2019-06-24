@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+    <div id="content-wrapper ">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container">
+            <div class="top-panel">
+                <h2>Search Vehicle</h2>
+                <div class="mui-textfield mui-textfield--float-label">
+                    <input id="myInput" type="text">
+                    <label>Search..</label>
+                </div>
+                <br>
+
+                <div class="panel">
+                    <div style="height = 500px">
+                        <table id="customers" class="table-bordered table-sm table table-striped" cellspacing="0"
+                            width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Company name</th>
+                                    <th>Registration</th>
+                                    <th>Type</th>
+                                    <th>Driver Name</th>
+                                    <th>Driver Contact</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable" style="height: 345px; overflow-y: auto;">
+                                <% products.forEach(function (product) { %>
+                                <tr>
+                                    <td><%= product.get('customer').get('name') %></td>
+                                    <td><%= product.get('registration') %></td>
+                                    <td><%= product.get('vehicle_type') %></td>
+                                    <td><%= product.get('driver') %></td>
+                                    <td><%= product.get('driver_no') %></td>
+                                </tr>
+                                <% }); %>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <footer style="margin-top: 20px;">
+                        <% if (pages > 0) { %>
+                        <div class="footer">
+                            <ul class="pagination text-center">
+
+                                <% if (currentPage == 0) { %>
+                                <li class="disabled"><a>First</a></li>
+                                <% } else { %>
+                                <li><a href="/vehicle/view_vehicle?page=0">First</a></li>
+                                <% } %>
+
+
+                                <% for(var i=1; i < lastPage-1; i++) {%>
+                                <% if(i == currentPage){ %>
+                                <li class="disabled"><a href="/vehicle/view_vehicle?page=<%= i %>"> <%= i %> </a></li>
+                                <% }else{ %>
+                                <li><a href="/vehicle/view_vehicle?page=<%= i %>"> <%= i %> </a></li>
+                                <% }} %>
+
+                                <% if (currentPage == pages-1) { %>
+                                <li class="disabled"><a>Last</a></li>
+                                <% } else { %>
+                                <li><a href="/vehicle/view_vehicle?page=<%= pages-1 %>">Last</a></li>
+                                <% } %>
+
+                            </ul>
+                        </div>
+                        <% } %>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <% include ../common/footer.ejs %>
+
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

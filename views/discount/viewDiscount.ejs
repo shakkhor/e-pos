@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+
+
+
+
+    <div class="mui-container">
+        <div class="mui-panel" style="margin-top: 72px; margin-left:10% ">
+            <div class="panel1">
+                <div>
+                    <table id="customers" class="table-bordered table-sm table table-striped" cellspacing="0"
+                        width="100%">
+                        <thead>
+                            <tr>
+                                <th>Comapny Name</th>
+                                <th>Product</th>
+                                <th>Discount Taka</th>
+                                <th>Discount Percent</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable" style="height: 380px; overflow-y: auto;">
+                            <% discounts.forEach(function (discount) { %>
+                            <tr>
+                                <td><%= discount.get('company').get('name') %></td>
+                                <td><%= discount.get('product').get('name') %></td>
+                                <td><%= discount.get('discountTaka') %></td>
+                                <td><%= discount.get('discountPercent') %>%</td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <footer style="margin-top: 20px;">
+                <% if (pages > 0) { %>
+                <div class="footer">
+                    <ul class="pagination text-center">
+
+                        <% if (currentPage == 0) { %>
+                        <li class="disabled"><a>First</a></li>
+                        <% } else { %>
+                        <li><a href="/discount/viewDiscount?page=0">First</a></li>
+                        <% } %>
+
+
+                        <% for(var i=1; i < lastPage-1; i++) {%>
+                        <% if(i == currentPage){ %>
+                        <li class="disabled"><a href="/discount/viewDiscount?page=<%= i %>"> <%= i %> </a></li>
+                        <% }else{ %>
+                        <li><a href="/discount/viewDiscount?page=<%= i %>"> <%= i %> </a></li>
+                        <% }} %>
+
+                        <% if (currentPage == pages-1) { %>
+                        <li class="disabled"><a>Last</a></li>
+                        <% } else { %>
+                        <li><a href="/discount/viewDiscount?page=<%= pages-1 %>">Last</a></li>
+                        <% } %>
+
+                    </ul>
+                </div>
+                <% } %>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <% include ../common/footer.ejs %>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+
+
+
+
+    <div class="mui-container">
+        <div class="mui-panel" style="margin-top: 72px; margin-left:10% ">
+            <center>
+                <br>
+                <legend style="margin-left:-5%; font-size: 24pt">Update Account</legend>
+                <br>
+            </center>
+
+
+            <form method="POST" action="/account/update">
+
+                <div class="mui-select mui-col-md-5">
+                    <legend>Current Balance</legend>
+                    <div class="mui-textfield">
+                        <input type="text" name="note" value="<%=balance%>" maxlength="35" readonly />
+                    </div>
+                </div>
+
+                <div class="mui-select mui-col-md-1">
+
+                </div>
+
+                <div class="mui-select mui-col-md-5">
+                    <legend>Amount to be added</legend>
+                    <div class="mui-textfield">
+                        <input type="number" name="expense" step="0.01" />
+                    </div>
+                </div>
+                <div class="mui-select mui-col-md-1">
+
+                </div>
+
+                <button class="mui-btn mui-btn--primary mui-btn--raised" type="submit">
+                    Submit
+                </button>
+                <button hidden class="mui-btn mui-btn--primary mui-btn--raised" type="submit">
+                    Close Account For Today
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <% include ../common/footer.ejs %>
+</body>
+
+</html>

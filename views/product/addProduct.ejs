@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+  <% include ../common/sidebar.ejs %>
+  <header id="header">
+    <% include ../common/navBar.ejs %>
+  </header>
+  <div class="mui-container">
+    <div class="mui-panel" style="margin-top: 72px;">
+      <form class="mui-form" method="POST" action="/product/insertInDb">
+        <legend>Add Product</legend>
+        <div class="mui-textfield">
+          <input type="text" name="name" required placeholder="Product name" />
+        </div>
+        <button class="mui-btn mui-btn--primary mui-btn--raised" type="submit">
+          Confirm
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+<footer>
+  <% include ../common/footer.ejs %>
+</footer>
+</html>

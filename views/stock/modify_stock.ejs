@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+    <div id="content-wrapper ">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container">
+            <div class="mui-panel" style="margin-top: 2%; margin-left: 10%">
+                <form class="mui-form" method="POST" action="stock/stockUpdate">
+                    <legend>Update Stock Price</legend>
+                    <div class="mui-row">
+                        <div class="mui-select mui-col-md-6">
+                            <select name="pid" id="stock-select">
+                                <option value="null" disabled selected>Select a stock</option>
+                                <% stocks.forEach(function (stock) { %>
+                                <option value="<%=stock.id%>"><%= stock.get('product').get('name') %>
+                                    <%= stock.get('buyingPrice')%> /<%= stock.get('sellingPrice')%></option>
+                                <% }); %>
+                            </select>
+                            <label>Select product</label>
+                        </div>
+                    </div>
+                    <input hidden id="stockId" value="" name="stkId">
+                    <div class="mui-select mui-col-md-4">
+                        <div class="mui-textfield">
+                            <legend>Quantity</legend>
+                            <input type="number" step="0.01" min="0.01" name="quantity" readonly required
+                                placeholder="Quantity" id="qty" />
+                        </div>
+                    </div>
+
+
+                    <div class="mui-select mui-col-md-4">
+                        <div class="mui-textfield">
+                            <legend>Buying Price</legend>
+                            <input type="number" id="bp" name="buying_price" value="" required
+                                placeholder="Buying Price" />
+                        </div>
+                    </div>
+
+
+                    <div class="mui-select mui-col-md-4">
+                        <div class="mui-textfield">
+                            <legend>Selling Price</legend>
+                            <input type="number" id="sp" name="selling_price" value="" required
+                                placeholder="Selling Price" />
+                        </div>
+                    </div>
+                    <br>
+                    <button class="mui-btn mui-btn--primary mui-btn--raised" type="submit">
+                        Confirm
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% include ../common/footer.ejs %>
+
+    <script>
+        var stocks = JSON.parse('<%-JSON.stringify(stocks)%>')
+        $('#stock-select').on('change', function (val) {
+            var selected = $(this).children("option:selected").val();
+            console.log('working ' + selected)
+            for (i = 0; i < stocks.length; i++) {
+                if (stocks[i].objectId == selected) {
+                    $('#qty').val(stocks[i].quantity)
+                    $('#qty').html(stocks[i].quantity)
+                    $('#sp').val(stocks[i].sellingPrice)
+                    $('#sp').html(stocks[i].sellingPrice)
+                    $('#bp').val(stocks[i].buyingPrice)
+                    $('#bp').html(stocks[i].buyingPrice)
+                    $('#stockId').val(stocks[i].objectId)
+                    console.log(typeof stocks[i].quantity)
+                    console.log(stocks[i].quantity)
+                    console.log('hello')
+                    break;
+                } else {
+                    $('#qty').val('0')
+                    $('#qty').html('0')
+                    $('#sp').val('0')
+                    $('#sp').html('0')
+                    $('#bp').val('0')
+                    $('#bp').html('0')
+                    $('#stockId').val('null')
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

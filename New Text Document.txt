@@ -1,0 +1,1 @@
+parse-dashboard  --appId zDmdrUrvD3WFdIM4 --masterKey TtW6WcNARzGvVbBN --serverURL "https://bppbackend.herokuapp.com/api" --appName bppbackend

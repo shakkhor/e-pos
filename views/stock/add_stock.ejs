@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+    <div id="content-wrapper ">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container">
+            <div class="mui-panel" style="margin-top: 2%; margin-left: 10%">
+                <form class="mui-form" method="POST" action="/stock/insertInDb">
+                    <legend>Add stock</legend>
+                    <div class="mui-row">
+                        <div class="mui-select mui-col-md-12">
+                            <select name="pid">
+                                <% products.forEach(function (product) { %>
+                                <option value="<%=product.id%>"><%=product.get('name')%></option>
+                                <% }); %>
+                            </select>
+                            <label>Select product</label>
+                        </div>
+                    </div>
+                    <div class="mui-textfield">
+                        <input type="number" step="0.01" min="0.01" name="quantity" required placeholder="Quantity" />
+                    </div>
+                    <div class="mui-textfield">
+                        <input type="text" name="buying_price" required placeholder="Buying Price" />
+                    </div>
+                    <div class="mui-textfield">
+                        <input type="text" name="selling_price" required placeholder="Selling Price" />
+                    </div>
+                    <button class="mui-btn mui-btn--primary mui-btn--raised" type="submit">
+                        Confirm
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% include ../common/footer.ejs %>
+
+
+</body>
+
+</html>

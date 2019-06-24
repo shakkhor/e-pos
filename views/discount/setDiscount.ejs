@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+
+    <div id="content-wrapper ">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container">
+            <div class="mui-panel" style="margin-top: 1%; margin-left:10% ">
+                <h1>Set Discount</h1>
+                <br>
+                <!-- <div class="mui-row">
+                    <select name="vehicle" id="vehicle-select" style="width:35%" required></select>
+
+                </div> -->
+                <form method="POST" action="/discount/settDiscount" class="mui-form">
+                    <div class="mui-row">
+                        <div class="mui-select mui-col-md-4">
+                            <legend>Company</legend>
+                            <select name="company_name">
+                                <option value="" disabled selected> Select Company</option>
+                                <% customers.forEach(function (customer) { %>
+                                <option value="<%=customer.id%>"><%= customer.get('name') %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div class="mui-select mui-col-md-4">
+                            <legend>Product</legend>
+                            <select name="pid">\
+                                <option value="" disabled selected> Select Product</option>
+                                <% products.forEach(function (product) { %>
+                                <option value="<%=product.id%>"><%= product.get('name') %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div class="mui-textfield mui-col-md-2">
+                            <legend>In percent</legend>
+                            <input name="percent" placeholder="Percent" type="number" step="0.01" value="0">
+                        </div>
+                        <div class="mui-textfield mui-col-md-2">
+                            <legend>In taka</legend>
+                            <input name="taka" placeholder="Taka" type="number" step="0.01" value="0">
+                        </div>
+                    </div>
+
+
+                    <!-- </div> -->
+                    <!-- <div class="mui-row">
+                        <div class="mui-textfield mui-col-md-3">
+                            <h2> Product Name </h2>
+                        </div>
+                        <div class="mui-textfield mui-col-md-2">
+                            <h2> Discount In Percent </h2>
+                        </div>
+                        <div class="mui-textfield mui-col-md-2">
+                            <h2> Discount In Taka </h2>
+                        </div>
+
+                    </div>
+                    
+                    <% products.forEach(function (product) { %>
+                    <div class="mui-row">
+                        <div class="mui-textfield mui-col-md-3">
+                            <input name="proudctName" value=" <%= product.get('name') %> " readonly>
+                        </div>
+                        <div class="mui-textfield mui-col-md-2">
+                            <input name="percent" placeholder="Percent" type="number" step="0.01" value="0">
+                        </div>
+                        <div class="mui-textfield mui-col-md-2">
+                            <input name="taka" placeholder="Taka" type="number" step="0.01" value="0">
+                        </div>
+                        <div class="mui-textfield mui-col-md-2">
+                            <input name="productId" placeholder="ids" type="text" value=" <%= product.id %> " hidden>
+                        </div>
+
+                    </div>
+                    <% }); %> -->
+                    <input name="test" placeholder="ids" type="text" value=" test " id="test" hidden>
+                    <button type="submit" class="mui-btn mui-btn--primary mui-btn--raised" id="confirm">Confirm</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <% include ../common/footer.ejs %>
+
+
+</body>
+
+</html>

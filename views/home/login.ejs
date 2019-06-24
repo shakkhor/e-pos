@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+  <div class="mui-container" style="height: 96%">
+    <a href="skype:echo123?call">test</a>
+    <div class="mui-panel" style="margin-top: 7%; ">
+      <form class="mui-form" method="POST" action="/account/login">
+        <legend>Username</legend>
+        <div class="mui-textfield">
+          <input type="text" name="username" required placeholder="Username" />
+        </div>
+        <legend>Password</legend>
+        <div class="mui-textfield">
+          <input type="password" name="password" required placeholder="Password" />
+        </div>
+        <button class="mui-btn mui-btn--primary mui-btn--raised" type="submit">
+          Login
+        </button>
+      </form>
+    </div>
+    <% include ../common/message.ejs %>
+    <!-- <p>Don't have and account?</p>
+    <button class="mui-btn mui-btn--raised" id="register">
+      Register
+    </button> -->
+    <!-- <p><%= message %></p> -->
+
+    <div id="snackbar">'Invalid username/password'</div>
+
+    <script>
+      var text = '<%= message %>'
+      function xyz() {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        // x.className = "hide";
+        // setTimeout(function () { x.className = x.className.replace("hide", ""); }, 3005);
+      }
+
+
+      $(document).ready(function () {
+        console.log("ready!");
+        if (text.length > 0) {
+          xyz()
+
+        }
+      });
+
+    </script>
+
+
+  </div>
+</body>
+<footer id="footerAccount">
+  <div>
+    <center>Made with ❤️️ by <a href="#">Bridge Tech</a></center>
+  </div>
+</footer>
+<!-- <script type="text/javascript">
+  document.getElementById("register").onclick = function () {
+    location.href = "/account/register";
+  };
+</script> -->
+
+</html>

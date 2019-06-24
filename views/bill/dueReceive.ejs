@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<% include ../common/head.ejs %>
+
+<body>
+    <% include ../common/sideBar.ejs %>
+    <header id="header">
+        <% include ../common/navBar.ejs %>
+    </header>
+    <div class="mui-container">
+        <div class="mui-panel" style="margin-top: 72px; margin-left:10% ">
+            <center>
+                <br>
+                <legend style="margin-left:0%; font-size: 24pt">Due Receive</legend>
+                <br>
+            </center>
+            <form class="mui-form" method="POST" action="/bill/due">
+
+                <div class="mui-row">
+                    <div class="mui-select mui-col-md-6">
+                        <select name="company_name" id="vehicle-select">
+                            <option value="null" disabled selected>Select Customer</option>
+                            <% customers.forEach(function (customer) { %>
+                            <option value="<%=customer.id%>,<%= customer.get('name') %>"><%= customer.get('name') %>
+                            </option>
+                            <% }) %>
+                        </select>
+                        <label>Select Company</label>
+                    </div>
+                </div>
+                <div class="mui-row">
+                    <div class="mui-select mui-col-md-3">
+                        <legend>Balance</legend>
+                        <div class="mui-textfield">
+                            <input type="number" name="balanceNow" maxlength="35" readonly value="" id="balance" />
+                            <p id="loading" style="color:black; font-size: 16pt"></p>
+                        </div>
+                    </div>
+
+                    <div class="mui-select mui-col-md-1"> </div>
+
+
+
+
+
+                    <div class="mui-select mui-col-md-3">
+                        <legend>Due Receive</legend>
+                        <div class="mui-textfield">
+                            <input type="number" name="dueReceive" step="0.01" value="" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="mui-btn mui-btn--primary mui-btn--raised" id="btnSubmit" type="submit">
+                    submit
+                </button>
+            </form>
+        </div>
+    </div>
+    <% include ../common/footer.ejs %>
+
+
+    <script>
+
+        $('#vehicle-select').on('change', function (val) {
+            var selected = $(this).children("option:selected").val();
+            var splitted = selected.split(',');
+            vehicle = splitted[0];
+            console.log(selected);
+            var myLink = '/ajax/get-balance?id=' + vehicle
+            $("#loading").text('...loading...');
+            $('#balance').val('')
+            $.ajax({
+                url: myLink,
+                success: function (result) {
+                    var res = JSON.parse(JSON.stringify(result))
+
+                    $('#balance').val(Number(res[0].balance).toFixed(2))
+                    $("#loading").text('');
+                    console.log(res[0].due)
+                    console.log(res)
+
+                },
+                error: function (err) {
+                    alert("API or Network fail");
+                }
+            });
+        })
+
+
+    </script>
+
+</body>
+
+</html>
