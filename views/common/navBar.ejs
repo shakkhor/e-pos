@@ -2,7 +2,7 @@
   <div class="mui-container-fluid">
     <a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
     <a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
-    <button class="mui-btn" style="margin-left: 60%;">Home</button>
+    <button class="mui-btn" style="margin-left: 60%;" id="home">Home</button>
     <div class="mui-dropdown">
       <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown">
         Report
@@ -11,9 +11,9 @@
       <ul class="mui-dropdown__menu mui-dropdown__menu--right">
         <li><a href="/report/currentSummery">Current Stock</a></li>
         <li><a href="/customer/customerAccounts">Due Statement</a></li>
-        <!-- <li><a href="/report/salesBetweenTime">Sales</a></li>
+        <li><a href="/report/salesBetweenTime">Sales</a></li>
         <li><a href="/report/dueTracsaction">Due transaction</a></li>
-        <li><a href="/report/accTransaction">Account transaction</a></li> -->
+        <li><a href="/report/accTransaction">Account transaction</a></li>
       </ul>
     </div>
     <button class="mui-btn" id="logout">Logout</button>
@@ -23,5 +23,8 @@
 <script type="text/javascript">
   document.getElementById("logout").onclick = function () {
     location.href = "/logout";
+  };
+  document.getElementById("home").onclick = function () {
+    location.href = "/";
   };
 </script>
