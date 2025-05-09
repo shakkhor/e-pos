@@ -14,8 +14,7 @@ Parse.setAsyncStorage(asyncStorage)
 
 Parse.initialize('zDmdrUrvD3WFdIM4', '', 'TtW6WcNARzGvVbBN')
 Parse.serverURL = 'https://bppbackend.herokuapp.com/api'
-// Parse.initialize('g6htEIDq27', '', 'By94ClNDTc')
-// Parse.serverURL = 'http://103.106.58.131:1337/parse'
+
 
 // app
 var app = express()
@@ -30,8 +29,8 @@ app.use(express.urlencoded({ extended: false }))
 // Cookie and session handaling
 app.use(
   cookieSession({
-    name: 'BPP_TOKEN',
-    secret: '42345235235325235235',
+    name: 'your-token-name',
+    secret: 'your-token-secret',
     maxAge: 15724800000
   })
 )
